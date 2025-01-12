@@ -121,12 +121,29 @@ const trendingNews = [
     'PlayStation 6 ne zaman çıkacak?'
 ];
 
-// Create News Card
+// Image Optimization and Caching
+function optimizeImage(url, width = 800) {
+    // Unsplash API için otomatik optimizasyon
+    if (url.includes('unsplash.com')) {
+        return `${url}?w=${width}&q=80&auto=format,compress`;
+    }
+    return url;
+}
+
+// Create News Card with Optimized Images
 function createNewsCard(news, isLarge = false) {
+    const optimizedImage = optimizeImage(news.image, isLarge ? 1200 : 800);
     return `
         <article class="news-card ${isLarge ? 'large' : ''} fade-in">
             <div class="card-image">
-                <img src="${news.image}" alt="${news.title}" loading="lazy">
+                <img 
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                    data-src="${optimizedImage}" 
+                    alt="${news.title}" 
+                    loading="lazy"
+                    width="${isLarge ? '1200' : '800'}"
+                    height="${isLarge ? '675' : '450'}"
+                >
                 <span class="category">${news.category}</span>
             </div>
             <div class="card-content">
@@ -154,9 +171,13 @@ function initTrendingSlider() {
     const trendingContent = trendingNews.map(news => `<div class="trending-item">${news}</div>`).join('');
     trendingSlider.innerHTML = trendingContent;
     
+    const items = trendingSlider.querySelectorAll('.trending-item');
+    items[0].classList.add('active');
+    
     setInterval(() => {
-        currentIndex = (currentIndex + 1) % trendingNews.length;
-        trendingSlider.style.transform = `translateY(-${currentIndex * 100}%)`;
+        items[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % items.length;
+        items[currentIndex].classList.add('active');
     }, 3000);
 }
 
@@ -194,12 +215,20 @@ function populatePopularNews() {
     popularList.innerHTML = popularNews;
 }
 
-// Create Video Card
+// Create Video Card with Optimized Thumbnails
 function createVideoCard(video) {
+    const optimizedThumbnail = optimizeImage(video.thumbnail, 600);
     return `
         <article class="video-card fade-in">
             <div class="video-thumbnail">
-                <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
+                <img 
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                    data-src="${optimizedThumbnail}" 
+                    alt="${video.title}" 
+                    loading="lazy"
+                    width="600"
+                    height="338"
+                >
                 <span class="duration">${video.duration}</span>
                 <button class="play-btn"><i class="fas fa-play"></i></button>
             </div>
@@ -259,36 +288,170 @@ function populateReviews() {
     }
 }
 
+// Populate News Grid with Loading State
+function populateNewsGrid() {
+    const newsGrid = document.querySelector('.news-grid');
+    if (!newsGrid) return;
+
+    // Show loading state
+    newsGrid.innerHTML = Array(6).fill(0).map(() => `
+        <article class="news-card loading">
+            <div class="card-image">
+                <div style="height: 200px; background: rgba(255, 255, 255, 0.1);"></div>
+            </div>
+            <div class="card-content">
+                <div style="width: 60%; height: 20px; background: rgba(255, 255, 255, 0.1); margin-bottom: 1rem;"></div>
+                <div style="width: 100%; height: 60px; background: rgba(255, 255, 255, 0.1);"></div>
+            </div>
+        </article>
+    `).join('');
+
+    // Simulate network delay
+    setTimeout(() => {
+        newsGrid.innerHTML = newsData.map(news => createNewsCard(news)).join('');
+        lazyLoadImages();
+    }, 1000);
+}
+
+// Initialize Components with Loading States
+function initComponents() {
+    // Show loading states
+    document.querySelectorAll('.section-content').forEach(section => {
+        section.classList.add('loading');
+    });
+
+    // Initialize components with delay
+    setTimeout(() => {
+        initTrendingSlider();
+        initHorizontalScroll();
+        populatePopularNews();
+        populateVideoGrid();
+        populateReviews();
+        initializeMobileMenu();
+
+        // Remove loading states
+        document.querySelectorAll('.section-content').forEach(section => {
+            section.classList.remove('loading');
+        });
+    }, 500);
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    initTrendingSlider();
-    initHorizontalScroll();
-    populatePopularNews();
-    populateVideoGrid();
-    populateReviews();
-    initializeMobileMenu();
+    // Initialize components
+    initComponents();
+    
+    // Lazy load images
     lazyLoadImages();
+    
+    // Add smooth scrolling
+    initSmoothScroll();
+    
+    // Initialize intersection observers
+    initIntersectionObservers();
 });
 
-// Lazy Loading Images
+// Lazy Loading Images with Intersection Observer
 function lazyLoadImages() {
-    const images = document.querySelectorAll('img[data-src]');
-    
     const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                imageObserver.unobserve(img);
+                const src = img.getAttribute('data-src');
+                
+                if (src) {
+                    img.src = src;
+                    img.removeAttribute('data-src');
+                    img.classList.add('fade-in');
+                }
+                
+                observer.unobserve(img);
+            }
+        });
+    }, {
+        rootMargin: '50px 0px',
+        threshold: 0.1
+    });
+
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+    });
+}
+
+// Smooth Scrolling
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
             }
         });
     });
-    
-    images.forEach(img => imageObserver.observe(img));
 }
 
-// Performance Optimization
+// Intersection Observers for Animations
+function initIntersectionObservers() {
+    // Fade in elements
+    const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+                fadeObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    document.querySelectorAll('.news-card, .video-card, .review-card').forEach(el => {
+        fadeObserver.observe(el);
+    });
+
+    // Sticky header optimization
+    const header = document.querySelector('.main-header');
+    let lastScrollY = window.scrollY;
+    
+    window.addEventListener('scroll', debounce(() => {
+        const currentScrollY = window.scrollY;
+        
+        if (currentScrollY > lastScrollY) {
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            header.style.transform = 'translateY(0)';
+        }
+        
+        lastScrollY = currentScrollY;
+    }, 100));
+}
+
+// Error Handling and Reporting
+window.addEventListener('error', (e) => {
+    console.error('An error occurred:', e.error);
+    // You could implement error reporting to a service here
+    reportError(e);
+});
+
+function reportError(error) {
+    // Implement error reporting logic
+    const errorData = {
+        message: error.message,
+        stack: error.error?.stack,
+        timestamp: new Date().toISOString(),
+        url: window.location.href,
+        userAgent: navigator.userAgent
+    };
+    
+    // Send error to your analytics service
+    console.log('Error reported:', errorData);
+}
+
+// Debounce Function
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -301,28 +464,54 @@ function debounce(func, wait) {
     };
 }
 
-// Debounced search
+// Search Functionality
+function handleSearch() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    if (!searchTerm) {
+        populateNewsGrid();
+        return;
+    }
+
+    const filteredNews = newsData.filter(news => 
+        news.title.toLowerCase().includes(searchTerm) ||
+        news.description.toLowerCase().includes(searchTerm) ||
+        news.category.toLowerCase().includes(searchTerm)
+    );
+
+    const newsGrid = document.querySelector('.news-grid');
+    if (newsGrid) {
+        if (filteredNews.length === 0) {
+            newsGrid.innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-search"></i>
+                    <h3>Sonuç Bulunamadı</h3>
+                    <p>"${searchTerm}" için sonuç bulunamadı. Lütfen farklı anahtar kelimeler deneyin.</p>
+                </div>
+            `;
+        } else {
+            newsGrid.innerHTML = filteredNews.map(news => createNewsCard(news)).join('');
+            // Yeni eklenen kartlar için lazy loading'i tekrar başlat
+            lazyLoadImages();
+        }
+    }
+}
+
+// Search event listeners
+searchButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    handleSearch();
+});
+
+searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        handleSearch();
+    }
+});
+
+// Debounced search for real-time filtering
 const debouncedSearch = debounce(handleSearch, 300);
 searchInput.addEventListener('input', debouncedSearch);
-
-// Error Handling
-window.addEventListener('error', (e) => {
-    console.error('An error occurred:', e.error);
-    // You could implement error reporting to a service here
-});
-
-// Add smooth scrolling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-    });
-});
 
 // Dropdown Menu Interaction
 const navItems = document.querySelectorAll('.nav-links > ul > li');
@@ -385,4 +574,17 @@ document.addEventListener('click', (e) => {
             link.querySelector('.dropdown').classList.remove('active');
         });
     }
-}); 
+});
+
+// Service Worker Registration
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+                console.log('ServiceWorker registration successful');
+            })
+            .catch(err => {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+    });
+} 

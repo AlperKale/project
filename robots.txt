@@ -1,21 +1,7 @@
 User-agent: *
 Allow: /
-Sitemap: https://your-domain.com/sitemap.xml
-
-# Disallow admin and private areas
 Disallow: /admin/
 Disallow: /private/
-Disallow: /includes/
-Disallow: /cgi-bin/
+Disallow: /temp/
 
-# Crawl-delay for specific bots
-User-agent: Googlebot
-Crawl-delay: 1
-
-User-agent: Bingbot
-Crawl-delay: 1
-
-# Block specific file types
-Disallow: /*.json$
-Disallow: /*.xml$
-Disallow: /*.txt$ 
+Sitemap: https://oracnoos.com/sitemap.xml 
