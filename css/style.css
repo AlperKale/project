@@ -34,6 +34,7 @@ body {
   box-shadow: 0 2px 20px rgba(0, 212, 255, 0.1);
   border-bottom: 1px solid rgba(0, 212, 255, 0.1);
   animation: headerSlideDown 0.5s ease-out;
+  padding: 0.5rem 0;
 }
 
 @keyframes headerSlideDown {
@@ -51,13 +52,17 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0.5rem 2rem;
   height: var(--header-height);
   max-width: 1400px;
   margin: 0 auto;
 }
 
 /* Logo Styles */
+.logo {
+  padding: 0.5rem 0;
+}
+
 .logo a {
   display: flex;
   align-items: center;
