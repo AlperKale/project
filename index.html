@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Latest technology news, reviews, and updates"
+    />
+    <title>Tech News Portal</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+    <!-- SEO Meta Tags -->
+    <link rel="canonical" href="https://your-domain.com" />
+    <meta name="robots" content="index, follow" />
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header class="main-header">
+      <nav class="navbar">
+        <div class="logo">
+          <a href="/">TechNews</a>
+        </div>
+        <div class="nav-links">
+          <ul>
+            <li>
+              <a href="#news" aria-label="News">News</a>
+              <ul class="dropdown">
+                <li>
+                  <a href="#latest-news" aria-label="Latest News"
+                    >Latest News</a
+                  >
+                </li>
+                <li>
+                  <a href="#global-trends" aria-label="Global Trends"
+                    >Global Trends</a
+                  >
+                </li>
+                <li>
+                  <a href="#industry-updates" aria-label="Industry Updates"
+                    >Industry Updates</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#science-innovations"
+                    aria-label="Science Innovations"
+                    >Science Innovations</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#technology" aria-label="Technology">Technology</a>
+              <ul class="dropdown">
+                <li>
+                  <a href="#ai-ml" aria-label="AI & Machine Learning"
+                    >AI & Machine Learning</a
+                  >
+                </li>
+                <li>
+                  <a href="#cybersecurity" aria-label="Cybersecurity"
+                    >Cybersecurity</a
+                  >
+                </li>
+                <li>
+                  <a href="#blockchain" aria-label="Blockchain">Blockchain</a>
+                </li>
+                <li>
+                  <a href="#iot" aria-label="Internet of Things (IoT)"
+                    >Internet of Things (IoT)</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#reviews" aria-label="Reviews">Reviews</a>
+              <ul class="dropdown">
+                <li>
+                  <a href="#smartphone-reviews" aria-label="Smartphone Reviews"
+                    >Smartphone Reviews</a
+                  >
+                </li>
+                <li>
+                  <a href="#laptop-reviews" aria-label="Laptop Reviews"
+                    >Laptop Reviews</a
+                  >
+                </li>
+                <li>
+                  <a href="#gadget-reviews" aria-label="Gadget Reviews"
+                    >Gadget Reviews</a
+                  >
+                </li>
+                <li>
+                  <a href="#app-reviews" aria-label="App Reviews"
+                    >App Reviews</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#gaming" aria-label="Gaming">Gaming</a>
+              <ul class="dropdown">
+                <li>
+                  <a
+                    href="#latest-game-releases"
+                    aria-label="Latest Game Releases"
+                    >Latest Game Releases</a
+                  >
+                </li>
+                <li>
+                  <a href="#esports-news" aria-label="Esports News"
+                    >Esports News</a
+                  >
+                </li>
+                <li>
+                  <a href="#console-reviews" aria-label="Console Reviews"
+                    >Console Reviews</a
+                  >
+                </li>
+                <li>
+                  <a href="#game-tutorials" aria-label="Game Tutorials"
+                    >Game Tutorials</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#discover" aria-label="Discover">Discover</a>
+              <ul class="dropdown">
+                <li>
+                  <a href="#trending-topics" aria-label="Trending Topics"
+                    >Trending Topics</a
+                  >
+                </li>
+                <li>
+                  <a href="#future-tech" aria-label="Future Tech"
+                    >Future Tech</a
+                  >
+                </li>
+                <li>
+                  <a href="#space-exploration" aria-label="Space Exploration"
+                    >Space Exploration</a
+                  >
+                </li>
+                <li>
+                  <a href="#how-tos-tutorials" aria-label="How-Tos & Tutorials"
+                    >How-Tos & Tutorials</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#cars" aria-label="Cars">Cars</a>
+              <ul class="dropdown">
+                <li>
+                  <a href="#evs" aria-label="Electric Vehicles (EVs)"
+                    >Electric Vehicles (EVs)</a
+                  >
+                </li>
+                <li>
+                  <a href="#latest-models" aria-label="Latest Models"
+                    >Latest Models</a
+                  >
+                </li>
+                <li>
+                  <a href="#autonomous-cars" aria-label="Autonomous Cars"
+                    >Autonomous Cars</a
+                  >
+                </li>
+                <li>
+                  <a href="#car-reviews" aria-label="Car Reviews"
+                    >Car Reviews</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#phone-comparison" aria-label="Phone Comparison"
+                >Phone Comparison</a
+              >
+              <ul class="dropdown">
+                <li>
+                  <a
+                    href="#compare-smartphones"
+                    aria-label="Compare Smartphones"
+                    >Compare Smartphones</a
+                  >
+                </li>
+                <li>
+                  <a href="#flagship-phones" aria-label="Flagship Phones"
+                    >Flagship Phones</a
+                  >
+                </li>
+                <li>
+                  <a href="#budget-phones" aria-label="Budget Phones"
+                    >Budget Phones</a
+                  >
+                </li>
+                <li>
+                  <a href="#camera-phones" aria-label="Camera Phones"
+                    >Camera Phones</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="user-actions">
+          <a href="#" class="login-btn">Login</a>
+          <a href="#" class="signup-btn">Sign Up</a>
+        </div>
+        <div class="search-bar">
+          <input type="text" placeholder="Search..." />
+          <button type="submit"><i class="fas fa-search"></i></button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-slider">
+        <div class="slider-container">
+          <!-- Ana slider -->
+          <div class="main-slider">
+            <div class="slide active">
+              <img src="images/tech-trends.jpg" alt="Technology Trends" />
+              <div class="slide-content">
+                <span class="category">Technology</span>
+                <h2>Latest Technology Trends 2024</h2>
+                <p>Discover the future of technology and innovation</p>
+              </div>
+            </div>
+            <div class="slide">
+              <img src="images/gaming.jpg" alt="Gaming News" />
+              <div class="slide-content">
+                <span class="category">Gaming</span>
+                <h2>Next-Gen Gaming Experience</h2>
+                <p>The latest in gaming technology and releases</p>
+              </div>
+            </div>
+          </div>
+          <!-- Slider kontrolleri -->
+          <div class="slider-controls">
+            <button class="prev-slide">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="next-slide">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+          <!-- Slider dots -->
+          <div class="slider-dots"></div>
+        </div>
+
+        <!-- Küçük haber kartları -->
+        <div class="news-highlights">
+          <div class="highlight-card">
+            <img src="images/ai.jpg" alt="AI News" />
+            <div class="highlight-content">
+              <span class="category">AI</span>
+              <h3>AI Breakthroughs</h3>
+            </div>
+          </div>
+          <div class="highlight-card">
+            <img src="images/crypto.jpg" alt="Crypto News" />
+            <div class="highlight-content">
+              <span class="category">Crypto</span>
+              <h3>Cryptocurrency Updates</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="featured-news">
+        <!-- Featured news items will be dynamically loaded -->
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="news-grid">
+        <!-- News items will be dynamically loaded -->
+      </div>
+    </main>
+
+    <!-- Popüler Haberler -->
+    <aside class="popular-news">
+      <h2>Popular News</h2>
+      <ul>
+        <li><a href="#">Microsoft AI Leak in Court</a></li>
+        <li><a href="#">Samsung Galaxy S25 Rumors</a></li>
+        <li><a href="#">New PlayStation Games Announced</a></li>
+      </ul>
+    </aside>
+
+    <!-- SDN TV and Video Content -->
+    <section class="video-content">
+      <h2>SDN TV</h2>
+      <div class="video-grid">
+        <div class="video-card">
+          <img src="images/video1.jpg" alt="Video 1" />
+          <h3>World's Largest TV Unveiled</h3>
+        </div>
+        <div class="video-card">
+          <img src="images/video2.jpg" alt="Video 2" />
+          <h3>Monster Gaming Laptop Review</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Keşfet Bölümü -->
+    <section class="explore-section">
+      <h2>Explore</h2>
+      <div class="explore-grid">
+        <div class="explore-card">
+          <img src="images/explore1.jpg" alt="Explore 1" />
+          <h3>Discover New Gadgets</h3>
+        </div>
+        <div class="explore-card">
+          <img src="images/explore2.jpg" alt="Explore 2" />
+          <h3>Top 10 Tech Innovations</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Oyun Dünyası -->
+    <section class="gaming-world">
+      <h2>Gaming World</h2>
+      <div class="gaming-grid">
+        <div class="game-card">
+          <img src="images/game1.jpg" alt="Game 1" />
+          <h3>Prime Gaming Free Games</h3>
+        </div>
+        <div class="game-card">
+          <img src="images/game2.jpg" alt="Game 2" />
+          <h3>New PlayStation Titles</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ürün İnceleme -->
+    <section class="product-reviews">
+      <h2>Product Reviews</h2>
+      <div class="review-grid">
+        <div class="review-card">
+          <img src="images/review1.jpg" alt="Review 1" />
+          <h3>ASUS Zenbook A14 Review</h3>
+        </div>
+        <div class="review-card">
+          <img src="images/review2.jpg" alt="Review 2" />
+          <h3>Latest Electric Cars</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fırsatlar ve İndirimler -->
+    <section class="deals-section">
+      <h2>Deals & Offers</h2>
+      <div class="deals-grid">
+        <div class="deal-card">
+          <img src="images/deal1.jpg" alt="Deal 1" />
+          <h3>Best Tech Deals</h3>
+        </div>
+        <div class="deal-card">
+          <img src="images/deal2.jpg" alt="Deal 2" />
+          <h3>Exclusive Discounts</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>About Us</h3>
+          <p>
+            Your trusted source for technology news, reviews, and insights. Stay
+            updated with the latest trends in tech, AI, gaming, and more.
+          </p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#news">News</a></li>
+            <li><a href="#technology">Technology</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#gaming">Gaming</a></li>
+            <li><a href="#discover">Discover</a></li>
+            <li><a href="#cars">Cars</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <ul>
+            <li><i class="fas fa-envelope"></i> info@technews.com</li>
+            <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+            <li><i class="fas fa-map-marker-alt"></i> San Francisco, CA</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2024 TechNews. All rights reserved. |
+          <a href="#privacy">Privacy Policy</a> |
+          <a href="#terms">Terms of Service</a>
+        </p>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js" defer></script>
+  </body>
+</html>
