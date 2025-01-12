@@ -1143,3 +1143,220 @@ button:hover {
     display: flex;
   }
 }
+
+/* Video Card Styles */
+.video-card {
+  background: var(--secondary-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.video-thumbnail {
+  position: relative;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.video-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.video-card:hover .video-thumbnail img {
+  transform: scale(1.05);
+}
+
+.duration {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.8);
+  color: var(--text-color);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(0, 212, 255, 0.9);
+  border: none;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.video-card:hover .play-btn {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.video-info {
+  padding: 1.5rem;
+}
+
+.video-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.video-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.video-meta i {
+  margin-right: 0.5rem;
+}
+
+/* Review Card Styles */
+.review-card {
+  background: var(--secondary-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  min-width: 300px;
+  max-width: 400px;
+}
+
+.review-image {
+  position: relative;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.review-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.review-card:hover .review-image img {
+  transform: scale(1.05);
+}
+
+.review-score {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--accent-color)
+  );
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--text-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.review-content {
+  padding: 1.5rem;
+}
+
+.review-content h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.review-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.pros h4,
+.cons h4 {
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+  color: var(--text-color);
+}
+
+.pros h4::before {
+  content: "✓";
+  color: var(--accent-color);
+  margin-right: 0.5rem;
+}
+
+.cons h4::before {
+  content: "×";
+  color: #ff4444;
+  margin-right: 0.5rem;
+}
+
+.review-details ul {
+  list-style: none;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.review-details li {
+  margin-bottom: 0.5rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.pros li::before {
+  content: "•";
+  color: var(--accent-color);
+  position: absolute;
+  left: 0;
+}
+
+.cons li::before {
+  content: "•";
+  color: #ff4444;
+  position: absolute;
+  left: 0;
+}
+
+/* Card Animation */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover Effects */
+.video-card:hover,
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 212, 255, 0.2);
+}

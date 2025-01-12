@@ -19,7 +19,7 @@ const newsData = [
         id: 1,
         title: 'GPT-5 Duyuruldu: Yapay Zekanın Yeni Çağı',
         description: 'OpenAI\'ın yeni dil modeli, insan benzeri anlama ve üretim yetenekleriyle dikkat çekiyor.',
-        image: 'images/ai-news.jpg',
+        image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995',
         category: 'Yapay Zeka',
         date: '2024-03-15'
     },
@@ -27,7 +27,7 @@ const newsData = [
         id: 2,
         title: 'Apple Vision Pro İnceleme',
         description: 'Apple\'ın yeni karma gerçeklik gözlüğünü detaylı olarak inceledik.',
-        image: 'images/vision-pro.jpg',
+        image: 'https://images.unsplash.com/photo-1707227155746-407e1f03abe6',
         category: 'İnceleme',
         date: '2024-03-14'
     },
@@ -35,9 +35,81 @@ const newsData = [
         id: 3,
         title: 'Elektrikli Araçlar İçin Yeni Batarya Teknolojisi',
         description: '5 dakikada şarj olan yeni nesil bataryalar yolda.',
-        image: 'images/ev-battery.jpg',
+        image: 'https://images.unsplash.com/photo-1706001151051-55e44f5be6f7',
         category: 'Teknoloji',
         date: '2024-03-13'
+    },
+    {
+        id: 4,
+        title: 'Samsung Galaxy S24 Ultra İnceleme',
+        description: 'Samsung\'un yeni amiral gemisi yapay zeka özellikleriyle öne çıkıyor.',
+        image: 'https://images.unsplash.com/photo-1706594060680-ea68a084c98c',
+        category: 'İnceleme',
+        date: '2024-03-12'
+    },
+    {
+        id: 5,
+        title: 'Nvidia\'nın Yeni Süper GPU\'su',
+        description: 'RTX 5090, oyun ve yapay zeka performansında çığır açıyor.',
+        image: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7',
+        category: 'Donanım',
+        date: '2024-03-11'
+    }
+];
+
+// Video Content Data
+const videoData = [
+    {
+        id: 1,
+        title: 'Apple Vision Pro Detaylı İnceleme',
+        thumbnail: 'https://images.unsplash.com/photo-1707227155746-407e1f03abe6',
+        duration: '12:45',
+        views: '125K',
+        category: 'İnceleme'
+    },
+    {
+        id: 2,
+        title: 'RTX 5090 Oyun Performansı Testi',
+        thumbnail: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7',
+        duration: '15:20',
+        views: '89K',
+        category: 'Donanım'
+    },
+    {
+        id: 3,
+        title: 'Elektrikli Araç Teknolojileri',
+        thumbnail: 'https://images.unsplash.com/photo-1706001151051-55e44f5be6f7',
+        duration: '08:30',
+        views: '45K',
+        category: 'Teknoloji'
+    }
+];
+
+// Review Content Data
+const reviewData = [
+    {
+        id: 1,
+        title: 'iPhone 15 Pro Max',
+        score: 9.2,
+        pros: ['Kamera performansı', 'İşlemci gücü', 'Batarya ömrü'],
+        cons: ['Yüksek fiyat', 'Şarj hızı'],
+        image: 'https://images.unsplash.com/photo-1706594060680-ea68a084c98c'
+    },
+    {
+        id: 2,
+        title: 'Samsung Galaxy S24 Ultra',
+        score: 9.0,
+        pros: ['S-Pen özellikleri', 'Ekran kalitesi', 'AI özellikleri'],
+        cons: ['Fiyat/performans', 'Şarj adaptörü yok'],
+        image: 'https://images.unsplash.com/photo-1706594060680-ea68a084c98c'
+    },
+    {
+        id: 3,
+        title: 'MacBook Pro M3',
+        score: 9.5,
+        pros: ['Performans', 'Batarya ömrü', 'Ekran kalitesi'],
+        cons: ['Yüksek fiyat', 'Port çeşitliliği'],
+        image: 'https://images.unsplash.com/photo-1706001151051-55e44f5be6f7'
     }
 ];
 
@@ -122,11 +194,78 @@ function populatePopularNews() {
     popularList.innerHTML = popularNews;
 }
 
+// Create Video Card
+function createVideoCard(video) {
+    return `
+        <article class="video-card fade-in">
+            <div class="video-thumbnail">
+                <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
+                <span class="duration">${video.duration}</span>
+                <button class="play-btn"><i class="fas fa-play"></i></button>
+            </div>
+            <div class="video-info">
+                <h3>${video.title}</h3>
+                <div class="video-meta">
+                    <span class="views"><i class="fas fa-eye"></i> ${video.views}</span>
+                    <span class="category">${video.category}</span>
+                </div>
+            </div>
+        </article>
+    `;
+}
+
+// Create Review Card
+function createReviewCard(review) {
+    return `
+        <article class="review-card fade-in">
+            <div class="review-image">
+                <img src="${review.image}" alt="${review.title}" loading="lazy">
+                <div class="review-score">${review.score}</div>
+            </div>
+            <div class="review-content">
+                <h3>${review.title}</h3>
+                <div class="review-details">
+                    <div class="pros">
+                        <h4>Artılar</h4>
+                        <ul>
+                            ${review.pros.map(pro => `<li>${pro}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>Eksiler</h4>
+                        <ul>
+                            ${review.cons.map(con => `<li>${con}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </article>
+    `;
+}
+
+// Populate Video Grid
+function populateVideoGrid() {
+    const videoGrid = document.querySelector('.video-grid');
+    if (videoGrid) {
+        videoGrid.innerHTML = videoData.map(video => createVideoCard(video)).join('');
+    }
+}
+
+// Populate Review Section
+function populateReviews() {
+    const scrollContent = document.querySelector('.reviews .scroll-content');
+    if (scrollContent) {
+        scrollContent.innerHTML = reviewData.map(review => createReviewCard(review)).join('');
+    }
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initTrendingSlider();
     initHorizontalScroll();
     populatePopularNews();
+    populateVideoGrid();
+    populateReviews();
     initializeMobileMenu();
     lazyLoadImages();
 });
