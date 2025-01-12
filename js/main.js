@@ -7,265 +7,126 @@ const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 const searchBar = document.querySelector('.search-bar');
 const dropdownLinks = document.querySelectorAll('.nav-links > ul > li');
+const trendingSlider = document.querySelector('.trending-news-slider');
+const scrollContents = document.querySelectorAll('.scroll-content');
+const popularList = document.querySelector('.popular-list');
+const agendaItems = document.querySelector('.agenda-items');
+const specialGrid = document.querySelector('.special-grid');
 
-// Sample News Data (In a real application, this would come from an API)
+// Sample News Data
 const newsData = [
     {
         id: 1,
-        title: 'Latest Technology Trends 2024',
-        description: 'Discover the most impactful technology trends that will shape the future.',
-        image: 'images/tech-trends.jpg',
-        category: 'Technology'
+        title: 'GPT-5 Duyuruldu: Yapay Zekanın Yeni Çağı',
+        description: 'OpenAI\'ın yeni dil modeli, insan benzeri anlama ve üretim yetenekleriyle dikkat çekiyor.',
+        image: 'images/ai-news.jpg',
+        category: 'Yapay Zeka',
+        date: '2024-03-15'
     },
     {
         id: 2,
-        title: 'Gaming Industry Updates',
-        description: 'Latest updates from the gaming industry and upcoming releases.',
-        image: 'images/gaming.jpg',
-        category: 'Gaming'
+        title: 'Apple Vision Pro İnceleme',
+        description: 'Apple\'ın yeni karma gerçeklik gözlüğünü detaylı olarak inceledik.',
+        image: 'images/vision-pro.jpg',
+        category: 'İnceleme',
+        date: '2024-03-14'
     },
     {
         id: 3,
-        title: 'Artificial Intelligence Breakthroughs',
-        description: 'Recent developments in AI and machine learning.',
-        image: 'images/ai.jpg',
-        category: 'AI'
+        title: 'Elektrikli Araçlar İçin Yeni Batarya Teknolojisi',
+        description: '5 dakikada şarj olan yeni nesil bataryalar yolda.',
+        image: 'images/ev-battery.jpg',
+        category: 'Teknoloji',
+        date: '2024-03-13'
     }
-    // Add more news items as needed
+];
+
+// Trending News Data
+const trendingNews = [
+    'Samsung Galaxy S25 Ultra sızdırıldı',
+    'Intel 14. nesil işlemciler tanıtıldı',
+    'Tesla\'dan yeni kompakt model',
+    'PlayStation 6 ne zaman çıkacak?'
 ];
 
 // Create News Card
-function createNewsCard(news) {
+function createNewsCard(news, isLarge = false) {
     return `
-        <article class="news-card fade-in">
-            <img src="${news.image}" alt="${news.title}">
-            <div class="news-card-content">
+        <article class="news-card ${isLarge ? 'large' : ''} fade-in">
+            <div class="card-image">
+                <img src="${news.image}" alt="${news.title}" loading="lazy">
                 <span class="category">${news.category}</span>
+            </div>
+            <div class="card-content">
+                <div class="card-meta">
+                    <span class="date">${formatDate(news.date)}</span>
+                    <span class="read-time">5 dk okuma</span>
+                </div>
                 <h3>${news.title}</h3>
                 <p>${news.description}</p>
-                <a href="#" class="read-more">Read More</a>
+                <a href="#" class="read-more">Devamını Oku <i class="fas fa-arrow-right"></i></a>
             </div>
         </article>
     `;
 }
 
-// Populate Featured News
-function populateFeaturedNews() {
-    featuredNews.innerHTML = newsData
-        .slice(0, 3)
-        .map(news => createNewsCard(news))
-        .join('');
+// Format Date
+function formatDate(dateString) {
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    return new Date(dateString).toLocaleDateString('tr-TR', options);
 }
 
-// Populate News Grid
-function populateNewsGrid() {
-    newsGrid.innerHTML = newsData
-        .map(news => createNewsCard(news))
-        .join('');
-}
-
-// Search Functionality
-function handleSearch() {
-    const searchTerm = searchInput.value.toLowerCase();
-    const filteredNews = newsData.filter(news =>
-        news.title.toLowerCase().includes(searchTerm) ||
-        news.description.toLowerCase().includes(searchTerm) ||
-        news.category.toLowerCase().includes(searchTerm)
-    );
+// Initialize Trending News Slider
+function initTrendingSlider() {
+    let currentIndex = 0;
+    const trendingContent = trendingNews.map(news => `<div class="trending-item">${news}</div>`).join('');
+    trendingSlider.innerHTML = trendingContent;
     
-    newsGrid.innerHTML = filteredNews
-        .map(news => createNewsCard(news))
-        .join('');
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % trendingNews.length;
+        trendingSlider.style.transform = `translateY(-${currentIndex * 100}%)`;
+    }, 3000);
 }
 
-// Event Listeners
-searchButton.addEventListener('click', handleSearch);
-searchInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        handleSearch();
-    }
-});
-
-// Mobile Menu Toggle
-const mobileMenuButton = document.createElement('button');
-mobileMenuButton.classList.add('mobile-menu-button');
-mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
-document.querySelector('.navbar').insertBefore(mobileMenuButton, document.querySelector('.nav-links'));
-
-mobileMenuButton.addEventListener('click', () => {
-    const navLinks = document.querySelector('.nav-links');
-    navLinks.classList.toggle('active');
-});
-
-// Infinite Scroll Implementation
-let isLoading = false;
-let page = 1;
-
-function loadMoreNews() {
-    if (isLoading) return;
-    
-    isLoading = true;
-    // Simulate API call with setTimeout
-    setTimeout(() => {
-        const newItems = newsData.map(news => ({
-            ...news,
-            id: news.id + page * newsData.length
-        }));
+// Initialize Horizontal Scroll
+function initHorizontalScroll() {
+    scrollContents.forEach(content => {
+        const scrollContainer = content.parentElement;
+        const prevBtn = scrollContainer.querySelector('.prev');
+        const nextBtn = scrollContainer.querySelector('.next');
         
-        newsGrid.innerHTML += newItems
-            .map(news => createNewsCard(news))
-            .join('');
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => {
+                content.scrollBy({ left: -300, behavior: 'smooth' });
+            });
             
-        isLoading = false;
-        page++;
-    }, 1000);
-}
-
-// Intersection Observer for Infinite Scroll
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && !isLoading) {
-            loadMoreNews();
-        }
-    });
-}, { threshold: 0.1 });
-
-// Observe the last news card
-const observerTarget = document.createElement('div');
-observerTarget.className = 'observer-target';
-newsGrid.appendChild(observerTarget);
-observer.observe(observerTarget);
-
-// Slider functionality
-class Slider {
-    constructor() {
-        this.slides = document.querySelectorAll('.slide');
-        this.dots = document.querySelector('.slider-dots');
-        this.currentSlide = 0;
-        this.slideCount = this.slides.length;
-        this.autoPlayInterval = null;
-        
-        // Create dots
-        this.createDots();
-        
-        // Add event listeners
-        document.querySelector('.prev-slide').addEventListener('click', () => this.prevSlide());
-        document.querySelector('.next-slide').addEventListener('click', () => this.nextSlide());
-        
-        // Start autoplay
-        this.startAutoPlay();
-        
-        // Pause autoplay on hover
-        document.querySelector('.slider-container').addEventListener('mouseenter', () => this.stopAutoPlay());
-        document.querySelector('.slider-container').addEventListener('mouseleave', () => this.startAutoPlay());
-    }
-    
-    createDots() {
-        for (let i = 0; i < this.slideCount; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => this.goToSlide(i));
-            this.dots.appendChild(dot);
-        }
-    }
-    
-    updateDots() {
-        const dots = document.querySelectorAll('.dot');
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === this.currentSlide);
-        });
-    }
-    
-    goToSlide(index) {
-        this.slides[this.currentSlide].classList.remove('active');
-        this.currentSlide = index;
-        if (this.currentSlide >= this.slideCount) this.currentSlide = 0;
-        if (this.currentSlide < 0) this.currentSlide = this.slideCount - 1;
-        this.slides[this.currentSlide].classList.add('active');
-        this.updateDots();
-    }
-    
-    nextSlide() {
-        this.goToSlide(this.currentSlide + 1);
-    }
-    
-    prevSlide() {
-        this.goToSlide(this.currentSlide - 1);
-    }
-    
-    startAutoPlay() {
-        this.autoPlayInterval = setInterval(() => this.nextSlide(), 5000);
-    }
-    
-    stopAutoPlay() {
-        clearInterval(this.autoPlayInterval);
-    }
-}
-
-// Mobile Menu Functions
-function initializeMobileMenu() {
-    // Toggle mobile menu
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        searchBar.classList.remove('active');
-    });
-
-    // Handle dropdowns on mobile
-    dropdownLinks.forEach(link => {
-        const dropdown = link.querySelector('.dropdown');
-        if (dropdown) {
-            link.addEventListener('click', (e) => {
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    dropdown.classList.toggle('active');
-                    
-                    // Close other dropdowns
-                    dropdownLinks.forEach(otherLink => {
-                        const otherDropdown = otherLink.querySelector('.dropdown');
-                        if (otherLink !== link && otherDropdown) {
-                            otherDropdown.classList.remove('active');
-                        }
-                    });
-                }
-            });
-        }
-    });
-
-    // Close mobile menu and search on resize
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            navLinks.classList.remove('active');
-            searchBar.classList.remove('active');
-            dropdownLinks.forEach(link => {
-                const dropdown = link.querySelector('.dropdown');
-                if (dropdown) {
-                    dropdown.classList.remove('active');
-                }
-            });
-        }
-    });
-
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.navbar')) {
-            navLinks.classList.remove('active');
-            searchBar.classList.remove('active');
-            dropdownLinks.forEach(link => {
-                const dropdown = link.querySelector('.dropdown');
-                if (dropdown) {
-                    dropdown.classList.remove('active');
-                }
+            nextBtn.addEventListener('click', () => {
+                content.scrollBy({ left: 300, behavior: 'smooth' });
             });
         }
     });
 }
 
-// Initialize mobile menu when DOM is loaded
+// Populate Popular News
+function populatePopularNews() {
+    const popularNews = newsData.slice(0, 5).map(news => `
+        <div class="popular-item">
+            <span class="number">${news.id}</span>
+            <div class="popular-content">
+                <span class="category">${news.category}</span>
+                <h4>${news.title}</h4>
+            </div>
+        </div>
+    `).join('');
+    
+    popularList.innerHTML = popularNews;
+}
+
+// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new Slider();
-    populateFeaturedNews();
-    populateNewsGrid();
+    initTrendingSlider();
+    initHorizontalScroll();
+    populatePopularNews();
     initializeMobileMenu();
     lazyLoadImages();
 });

@@ -226,152 +226,134 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-      <div class="hero-slider">
-        <div class="slider-container">
-          <!-- Ana slider -->
-          <div class="main-slider">
-            <div class="slide active">
-              <img src="images/tech-trends.jpg" alt="Technology Trends" />
-              <div class="slide-content">
-                <span class="category">Technology</span>
-                <h2>Latest Technology Trends 2024</h2>
-                <p>Discover the future of technology and innovation</p>
-              </div>
-            </div>
-            <div class="slide">
-              <img src="images/gaming.jpg" alt="Gaming News" />
-              <div class="slide-content">
-                <span class="category">Gaming</span>
-                <h2>Next-Gen Gaming Experience</h2>
-                <p>The latest in gaming technology and releases</p>
-              </div>
-            </div>
-          </div>
-          <!-- Slider kontrolleri -->
-          <div class="slider-controls">
-            <button class="prev-slide">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="next-slide">
-              <i class="fas fa-chevron-right"></i>
-            </button>
-          </div>
-          <!-- Slider dots -->
-          <div class="slider-dots"></div>
-        </div>
-
-        <!-- Küçük haber kartları -->
-        <div class="news-highlights">
-          <div class="highlight-card">
-            <img src="images/ai.jpg" alt="AI News" />
-            <div class="highlight-content">
-              <span class="category">AI</span>
-              <h3>AI Breakthroughs</h3>
-            </div>
-          </div>
-          <div class="highlight-card">
-            <img src="images/crypto.jpg" alt="Crypto News" />
-            <div class="highlight-content">
-              <span class="category">Crypto</span>
-              <h3>Cryptocurrency Updates</h3>
-            </div>
+      <div class="featured-article">
+        <div class="featured-image">
+          <img src="images/featured.jpg" alt="Featured Article" />
+          <div class="featured-overlay">
+            <span class="category">Yapay Zeka</span>
+            <h1>GPT-5 Duyuruldu: Yapay Zekanın Yeni Çağı Başlıyor</h1>
+            <p>
+              OpenAI'ın yeni dil modeli, insan benzeri anlama ve üretim
+              yetenekleriyle dikkat çekiyor.
+            </p>
+            <a href="#" class="read-more-btn"
+              >Devamını Oku <i class="fas fa-arrow-right"></i
+            ></a>
           </div>
         </div>
       </div>
-
-      <div class="featured-news">
-        <!-- Featured news items will be dynamically loaded -->
+      <div class="trending-strip">
+        <div class="trending-label"><i class="fas fa-fire"></i> Trend</div>
+        <div class="trending-news-slider">
+          <!-- Trending haberler dinamik olarak eklenecek -->
+        </div>
       </div>
     </section>
 
     <!-- Main Content -->
     <main class="main-content">
-      <div class="news-grid">
-        <!-- News items will be dynamically loaded -->
+      <!-- Kategori Bölümleri -->
+      <div class="category-sections">
+        <!-- Teknoloji Haberleri -->
+        <section class="news-section technology-news">
+          <div class="section-header">
+            <h2>Teknoloji</h2>
+            <a href="#" class="view-all"
+              >Tümünü Gör <i class="fas fa-chevron-right"></i
+            ></a>
+          </div>
+          <div class="news-grid">
+            <!-- Haberler dinamik olarak eklenecek -->
+          </div>
+        </section>
+
+        <!-- İncelemeler -->
+        <section class="news-section reviews">
+          <div class="section-header">
+            <h2>İncelemeler</h2>
+            <a href="#" class="view-all"
+              >Tümünü Gör <i class="fas fa-chevron-right"></i
+            ></a>
+          </div>
+          <div class="horizontal-scroll">
+            <div class="scroll-content">
+              <!-- İnceleme kartları dinamik olarak eklenecek -->
+            </div>
+            <button class="scroll-btn prev">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="scroll-btn next">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </section>
+
+        <!-- Video İçerikler -->
+        <section class="news-section video-content">
+          <div class="section-header">
+            <h2>SDN TV</h2>
+            <a href="#" class="view-all"
+              >Tümünü Gör <i class="fas fa-chevron-right"></i
+            ></a>
+          </div>
+          <div class="video-grid">
+            <!-- Video kartları dinamik olarak eklenecek -->
+          </div>
+        </section>
       </div>
+
+      <!-- Sağ Sidebar -->
+      <aside class="sidebar">
+        <!-- Popüler Haberler -->
+        <div class="popular-news">
+          <h3>Popüler Haberler</h3>
+          <div class="popular-list">
+            <!-- Popüler haberler dinamik olarak eklenecek -->
+          </div>
+        </div>
+
+        <!-- Teknoloji Gündemi -->
+        <div class="tech-agenda">
+          <h3>Teknoloji Gündemi</h3>
+          <div class="agenda-items">
+            <!-- Gündem maddeleri dinamik olarak eklenecek -->
+          </div>
+        </div>
+
+        <!-- Reklam Alanı -->
+        <div class="ad-space">
+          <div class="ad-placeholder">
+            <span>Reklam</span>
+          </div>
+        </div>
+      </aside>
     </main>
 
-    <!-- Popüler Haberler -->
-    <aside class="popular-news">
-      <h2>Popular News</h2>
-      <ul>
-        <li><a href="#">Microsoft AI Leak in Court</a></li>
-        <li><a href="#">Samsung Galaxy S25 Rumors</a></li>
-        <li><a href="#">New PlayStation Games Announced</a></li>
-      </ul>
-    </aside>
-
-    <!-- SDN TV and Video Content -->
-    <section class="video-content">
-      <h2>SDN TV</h2>
-      <div class="video-grid">
-        <div class="video-card">
-          <img src="images/video1.jpg" alt="Video 1" />
-          <h3>World's Largest TV Unveiled</h3>
+    <!-- Özel İçerik Bölümü -->
+    <section class="special-content">
+      <div class="container">
+        <div class="section-header">
+          <h2>Özel İçerikler</h2>
+          <a href="#" class="view-all"
+            >Tümünü Gör <i class="fas fa-chevron-right"></i
+          ></a>
         </div>
-        <div class="video-card">
-          <img src="images/video2.jpg" alt="Video 2" />
-          <h3>Monster Gaming Laptop Review</h3>
+        <div class="special-grid">
+          <!-- Özel içerik kartları dinamik olarak eklenecek -->
         </div>
       </div>
     </section>
 
-    <!-- Keşfet Bölümü -->
-    <section class="explore-section">
-      <h2>Explore</h2>
-      <div class="explore-grid">
-        <div class="explore-card">
-          <img src="images/explore1.jpg" alt="Explore 1" />
-          <h3>Discover New Gadgets</h3>
-        </div>
-        <div class="explore-card">
-          <img src="images/explore2.jpg" alt="Explore 2" />
-          <h3>Top 10 Tech Innovations</h3>
-        </div>
-      </div>
-    </section>
-
-    <!-- Oyun Dünyası -->
-    <section class="gaming-world">
-      <h2>Gaming World</h2>
-      <div class="gaming-grid">
-        <div class="game-card">
-          <img src="images/game1.jpg" alt="Game 1" />
-          <h3>Prime Gaming Free Games</h3>
-        </div>
-        <div class="game-card">
-          <img src="images/game2.jpg" alt="Game 2" />
-          <h3>New PlayStation Titles</h3>
-        </div>
-      </div>
-    </section>
-
-    <!-- Ürün İnceleme -->
-    <section class="product-reviews">
-      <h2>Product Reviews</h2>
-      <div class="review-grid">
-        <div class="review-card">
-          <img src="images/review1.jpg" alt="Review 1" />
-          <h3>ASUS Zenbook A14 Review</h3>
-        </div>
-        <div class="review-card">
-          <img src="images/review2.jpg" alt="Review 2" />
-          <h3>Latest Electric Cars</h3>
-        </div>
-      </div>
-    </section>
-
-    <!-- Fırsatlar ve İndirimler -->
-    <section class="deals-section">
-      <h2>Deals & Offers</h2>
-      <div class="deals-grid">
-        <div class="deal-card">
-          <img src="images/deal1.jpg" alt="Deal 1" />
-          <h3>Best Tech Deals</h3>
-        </div>
-        <div class="deal-card">
-          <img src="images/deal2.jpg" alt="Deal 2" />
-          <h3>Exclusive Discounts</h3>
+    <!-- Newsletter Bölümü -->
+    <section class="newsletter-section">
+      <div class="container">
+        <div class="newsletter-content">
+          <h2>Teknoloji Dünyasından Haberdar Olun</h2>
+          <p>En son teknoloji haberlerini ve özel içerikleri kaçırmayın!</p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="E-posta adresiniz" required />
+            <button type="submit">Abone Ol</button>
+          </form>
         </div>
       </div>
     </section>
